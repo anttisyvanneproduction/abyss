@@ -17,11 +17,11 @@
     ".": "./dist/index.js"
   },
   "bin": {
-    "abyss": "./dist/cli.js",
-    "abyssstack": "./dist/cli.js",
-    "antti": "./dist/cli.js",
-    "antti-mcp": "./dist/mcp.js",
-    "antti-mcp-http": "./dist/mcp-http.js"
+    "abyss": "dist/cli.js",
+    "abyssstack": "dist/cli.js",
+    "antti": "dist/cli.js",
+    "antti-mcp": "dist/mcp.js",
+    "antti-mcp-http": "dist/mcp-http.js"
   },
   "scripts": {
     "dev": "tsx src/cli.ts",
