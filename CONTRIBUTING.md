@@ -41,7 +41,7 @@ Satire must be:
 - **Technically credible**: the absurdity is real, the exaggeration is measured
 - **Dry**: Finnish deadpan, not stand-up
 
-Read the Partner-Safe Satire Policy in TODO.md before writing satire content.
+Keep satire partner-safe: target machinery and process, not named individuals or vendors.
 
 ## Principles
 

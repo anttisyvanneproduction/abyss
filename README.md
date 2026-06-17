@@ -78,13 +78,46 @@ Skills live in `prompts/skills/`. Each is a standalone system prompt the agent l
 | `reduce` | Corporate → plain English. |
 | `induce` | Plain English → corporate theatre. |
 | `commit` | Conventional commit messages with optional dry organizational context. |
-| `review` | Code review: bug / gravity / fog / theatre severity tiers. |
-| `standup` | Bidirectional: actual work → plain summary, or plain → steering-group-ready. |
 | `jira` | 5 words → complete Jira epic. The ratio is the joke. |
 | `doccheck` | Documentation alignment audit. Finds fiction, stale claims, missing coverage, terminology drift. |
 | `watermelon` | Watermelon status detection: green outside, red inside. Surfaces the seeds that give it away. |
 | `preview` | Declared vs actual maturity. Readiness certificate. SLA theatre. Verdict. |
 | `burn` | Burns tokens. Asks first. Generates the full eleven-year transformation program. |
+| `estimate` | Effort estimation with honest uncertainty bands. The number will be wrong. This is documented. |
+| `budget` | CFO budget reallocation email. The number was wrong before it left the department. |
+| `compliance` | Translate compliance requirements into what actually needs to change in the system. |
+| `dataquality` | Diagnose data quality problems. Separate signal from noise. |
+| `masterdata` | Master data governance analysis. Identifies who owns the entity and why no one will admit it. |
+| `meeting` | Process a transcript or meeting summary into what actually happened and what should have. |
+| `thunderdome` | Judge a Thunderdome fight. Declare a winner. Name the fatal flaw. Write the verdict. |
+| `vendor-demo-decoder` | Decode a vendor demo into what was promised, what was shown, and what becomes your problem post-signature. |
+| **Theory of Constraints** | |
+| `toc-bottleneck` | 5 Focusing Steps — identify, exploit, subordinate, elevate, repeat |
+| `toc-buffer` | Buffer management — protect throughput from statistical variation |
+| `toc-cloud` | Evaporating Cloud — surface and dissolve the conflict behind a dilemma |
+| `toc-crt` | Current Reality Tree — map cause-effect chains to the root cause |
+| `toc-dbr` | Drum-Buffer-Rope — schedule the whole system from the constraint |
+| `toc-frt` | Future Reality Tree — validate that the proposed change actually fixes the problem |
+| `toc-prerequisite` | Prerequisite Tree — sequence obstacles to reach the objective |
+| `toc-tact` | Transition Tree — implementation plan with causal logic for each step |
+| `toc-throughput` | Throughput Accounting — T, I, OE; why cutting cost is the wrong lever |
+| `toc-transition` | Transition from current to future state without destroying current throughput |
+| **Toyota Production System** | |
+| `tps-5s` | Sort, Set in order, Shine, Standardize, Sustain |
+| `tps-5whys` | Ask why five times. Stop when you reach a system cause, not a person. |
+| `tps-andon` | Stop the line. Surface the problem. Fix it before continuing. |
+| `tps-genba` | Go to where the work happens. Look. Do not bring slides. |
+| `tps-genchi-genbutsu` | Go and see for yourself before drawing conclusions |
+| `tps-hansei` | Structured reflection on failure. Not blame. Not celebration. Honest accounting. |
+| `tps-heijunka` | Level the load. Eliminate the mountain and the valley. |
+| `tps-jidoka` | Build quality in. Stop when something is wrong. Do not pass defects forward. |
+| `tps-kaizen` | Continuous improvement. Small, real, verified. Not a workshop output. |
+| `tps-kanban` | Pull system. Work is triggered by consumption, not forecast. |
+| `tps-konnyaku-stone` | Polish the stone. Smooth transitions between steps until flow is possible. |
+| `tps-muda-muri-mura` | Identify and eliminate waste, overburden, and unevenness |
+| `tps-nemawashi` | Build consensus before the meeting. The meeting is for announcing, not deciding. |
+| `tps-obeya` | Big room. All information visible. All stakeholders present. No slides. |
+| `tps-poka-yoke` | Mistake-proof the process so the error cannot occur |
 
 ### Agents — subagent layer
 
@@ -97,6 +130,11 @@ Agents live in `prompts/agents/`. Specialized subagents with strict scope limits
 | `antti-auditor` | Diff/branch reviewer. Enterprise severity tiers. No praise. |
 | `antti-junior` | Executes exactly what the ticket says. Nothing more. Escalates on ambiguity. |
 | `antti-theorganizationalanarchist` | Translates organizational artifacts into what they actually mean. CLAIMED / ACTUAL / SILENT / SERVES. |
+| `antti-aiarchitect` | AI architecture advisor. Cuts through the hype. Knows the cost before the steering group does. |
+| `antti-writer` | Writing agent. Professional tone. Antti voice. Uses the cheapest available model because writing is for juniors. |
+| `antti-toc` | Theory of Constraints practitioner. Routes to TOC sub-skills. Has read Goldratt. Has seen the constraint ignored. |
+| `antti-tps` | Toyota Production System practitioner. Routes to TPS sub-skills. TPS is not motivational wallpaper. |
+| `antti-projectplanner` | Project planner. Dangerous category. Will plan the project. The plan will be wrong. This is expected and documented. |
 
 ### Support interface — CLI
 
@@ -104,18 +142,22 @@ Local execution and setup.
 
 | Command | What it does |
 |---------|-------------|
-| `antti setup` | Detects installed agent CLIs (Claude Code, Codex, VS Code, Pi). Writes MCP config + skill. Installs hooks. Installs statusline. |
-| `antti setup --init` | Writes per-repo rule files: `AGENTS.md`, `.github/copilot-instructions.md` |
-| `antti models` | Shows current model configuration |
-| `antti meme --list` | Fetches live template list from imgflip.com/popular-meme-ids |
-| `antti meme --template <id> <text...>` | Generates a captioned meme via imgflip API |
-| `antti memory` | Search or list stored context |
-| `antti memory-add` | Add a note to local memory |
-| `antti depress` | Strip ceremony from text |
-| `antti plan` | Vague ask → tasks with testable checks |
-| `antti spec` | Situation → SHALL/MUST/SHOULD requirements |
-| `antti casing` | Convert identifier casing |
-| `antti dataplatform` | Data platform signal detection |
+| `abyss setup` | Detects installed agent CLIs (Claude Code, Codex, GitHub Copilot). Writes MCP config + skill. Installs hooks. Installs statusline. |
+| `abyss setup --init` | Writes per-repo rule files: `AGENTS.md`, `.github/copilot-instructions.md` |
+| `abyss models` | Shows current model configuration |
+| `abyss meme --list` | Fetches live template list from imgflip.com/popular-meme-ids |
+| `abyss meme --template <id> <text...>` | Generates a captioned meme via imgflip API |
+| `abyss memory` | Search or list stored context |
+| `abyss memory-add` | Add a note to local memory |
+| `abyss depress` | Strip ceremony from text |
+| `abyss plan` | Vague ask → tasks with testable checks |
+| `abyss spec` | Situation → SHALL/MUST/SHOULD requirements |
+| `abyss casing` | Convert identifier casing |
+| `abyss dataplatform` | Data platform signal detection |
+| `abyss skills` | List all available skills and agents with category and spice rating |
+| `abyss skills --all` | Install all skills and agents into the current project |
+| `abyss skills --opex` | Install the TOC + TPS operational excellence bundle |
+| `abyss thunderdome` | Launch AI agents in a synchronized fight for the right to implement a task |
 
 The satire is the diagnostic instrument. The code is the delivery vehicle. Both are open source.
 
@@ -135,8 +177,9 @@ These exist, are tested, and produce output.
 |-----------|---------|-------------|
 | **MCP server (stdio)** | `antti-mcp` | 4 I/O tools for Claude Code, GitHub Copilot, Codex |
 | **MCP server (HTTP)** | `antti-mcp-http` | Same 4 I/O tools over HTTP for ChatGPT and remote agents |
-| **Skills** | `prompts/skills/` | 18 skill files: diagnose, roast, depress, plan, spec, casing, dataplatform, archaeology, reduce, induce, commit, review, standup, jira, preview, doccheck, watermelon, burn |
-| **Agents** | `prompts/agents/` | 5 subagents: archaeologist, builder, auditor, junior, theorganizationalanarchist |
+| **Skills** | `prompts/skills/` | 48 skill files: core skills + Theory of Constraints (10) + Toyota Production System (15) + operational and compliance skills |
+| **Agents** | `prompts/agents/` | 10 subagents: archaeologist, builder, auditor, junior, theorganizationalanarchist, aiarchitect, writer, toc, tps, projectplanner |
+| **Thunderdome** | `abyss thunderdome` | Synchronized 3-phase AI agent arena. Phase 1: implement. Phase 2: attack. Phase 3: judgment. Three contestants: Claude Code, Codex, GitHub Copilot. |
 | **Hooks** | `src/hooks/` | SessionStart (skill injection, gravity detection, model setup trigger), UserPromptSubmit (context discipline, turn counter, topic drift), Statusline (mode badge in Claude Code status bar) |
 | **Setup** | `antti setup` | Auto-detects agent CLIs, writes MCP config and skill, installs hooks |
 | **Meme** | `antti meme` | Live template list from imgflip.com, caption via API |
@@ -218,8 +261,8 @@ npm install -g @syvnne/abyss-stack
 Or from source:
 
 ```bash
-git clone https://github.com/epical-antti-syvanne/abyss-stack
-cd abyss-stack
+git clone https://github.com/anttisyvanneproduction/abyss
+cd abyss
 npm install
 npm run build
 npm link   # makes antti, antti-mcp, antti-mcp-http available globally
@@ -418,8 +461,8 @@ Proof-not-press: READY. All 7 tasks have testable checks.
 graph TB
     subgraph "Agent — does the reasoning"
         claude[Claude / GHCP / Codex / local model]
-        skills[Skills · prompts/skills/ · 15 skill files]
-        agents[Subagents · prompts/agents/ · 4 specialized agents]
+        skills[Skills · prompts/skills/ · 48 skill files]
+        agents[Subagents · prompts/agents/ · 10 specialized agents]
     end
     subgraph "MCP — I/O only · 4 tools"
         meme_t[get_meme_templates · caption_meme]
@@ -933,31 +976,45 @@ This is only to make the future ecosystem expansion more embarrassing.
 
 ```bash
 # Setup — run once after install
-antti setup                          # detect agent CLIs, configure MCP + skill + hooks
-antti setup --init                   # also write per-repo rule files
-antti setup --force                  # overwrite existing config
-antti models                         # show current model configuration
+abyss setup                          # detect agent CLIs, configure MCP + skill + hooks
+abyss setup --init                   # also write per-repo rule files
+abyss setup --force                  # overwrite existing config
+abyss models                         # show current model configuration
+
+# Skills
+abyss skills                         # list all available skills and agents
+abyss skills --all                   # install all skills and agents into current project
+abyss skills --opex                  # install TOC + TPS operational excellence bundle
+abyss skills --category toc          # install Theory of Constraints skills only
+abyss skills --spice medium          # filter by maximum spice level
+
+# Thunderdome
+abyss thunderdome                    # interactive arena setup wizard
+abyss duel                           # alias
+abyss duel --judge                   # aggregate proposals for manual judgment
+abyss duel --apply <winner>          # copy winning implementation to project root
+abyss duel --status                  # show who has filed proposals
 
 # Meme
-antti meme --list                    # fetch live template list from imgflip.com
-antti meme --template 181913649 "doing the work" "getting aligned on the work"
-antti meme --template <id> <box1> [box2...] --no-url   # preview without API call
+abyss meme --list                    # fetch live template list from imgflip.com
+abyss meme --template 181913649 "doing the work" "getting aligned on the work"
+abyss meme --template <id> <box1> [box2...] --no-url   # preview without API call
 
 # Memory
-antti memory "power bi"              # search memory
-antti memory --category enterprise_gravity
-antti memory-add --category decision_fossils "decision text"
+abyss memory "power bi"              # search memory
+abyss memory --category enterprise_gravity
+abyss memory-add --category decision_fossils "decision text"
 
 # Analysis (CLI, signal-based)
-antti depress "going forward we will leverage synergies"
-antti plan "align stakeholders before go-live, SAP still uses final_final.xlsx"
-antti spec "SAP invoice mapping uses Excel, nobody owns it"
-antti dataplatform "we use Databricks and dbt on Snowflake"
-antti casing myIdentifier --style snake_case
+abyss depress "going forward we will leverage synergies"
+abyss plan "align stakeholders before go-live, SAP still uses final_final.xlsx"
+abyss spec "SAP invoice mapping uses Excel, nobody owns it"
+abyss dataplatform "we use Databricks and dbt on Snowflake"
+abyss casing myIdentifier --style snake_case
 
 # Flags for main command
-antti --mode diagnose "legacy Oracle invoice mapping"
-antti --mode codec --direction reduce "unlock value"
+abyss --mode diagnose "legacy Oracle invoice mapping"
+abyss --mode codec --direction reduce "unlock value"
 # --json       structured output
 # --safe       reduce sarcasm
 # --more-edge  increase absurdity
