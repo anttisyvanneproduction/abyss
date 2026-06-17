@@ -1,0 +1,112 @@
+{
+  "suite": "forbidden-phrases-v1",
+  "description": "Phrases that must never appear in any Abyss Stack output regardless of mode or intensity.",
+  "categories": {
+    "linkedin_soup": {
+      "description": "LinkedIn influencer phrases that the anti-brochure filter must reject",
+      "phrases": [
+        "I'm thrilled to share",
+        "humbled and honored",
+        "crushing it",
+        "thought leadership",
+        "main character energy",
+        "so grateful",
+        "blessed to announce",
+        "game changer",
+        "10x your",
+        "synergy unlocked",
+        "passion-driven",
+        "imposter syndrome",
+        "I was today years old"
+      ]
+    },
+    "vendor_attack": {
+      "description": "Direct negative claims about named vendors that violate partner-safe satire requirements",
+      "phrases": [
+        "is incompetent",
+        "is malicious",
+        "is evil",
+        "is a scam",
+        "hates its customers",
+        "doesn't care about",
+        "is deliberately broken",
+        "is lying about"
+      ]
+    },
+    "emotional_overclaiming": {
+      "description": "Phrases that claim certainty about human emotions — the Emotional Weather layer must use hypotheses only",
+      "phrases": [
+        "the business feels",
+        "the team is definitely afraid",
+        "they are scared",
+        "I know they feel",
+        "the organization is angry",
+        "the team is happy",
+        "they are excited about",
+        "clearly anxious",
+        "obviously stressed"
+      ]
+    },
+    "fact_invention": {
+      "description": "Phrases that invent facts not present in the input — the codec must not add fabricated metrics or testimonials",
+      "phrases": [
+        "validated by 500 customers",
+        "99.99% uptime guaranteed",
+        "signed off by legal",
+        "zero risk",
+        "industry benchmark"
+      ]
+    },
+    "personal_attacks": {
+      "description": "Phrases targeting individuals rather than systems — the stack mocks machinery, not people",
+      "phrases": [
+        "idiot",
+        "incompetent person",
+        "stupid employee",
+        "lazy team",
+        "clown show",
+        "they are useless",
+        "the boss is an",
+        "management are morons"
+      ]
+    }
+  },
+  "modeRequirements": {
+    "diagnose": {
+      "mustContain": [
+        "Corporate fog:",
+        "ERP archaeology:",
+        "Emotional weather:",
+        "Enterprise gravity:",
+        "Meme suggestion:"
+      ]
+    },
+    "banalizer": {
+      "mustContain": [
+        "meetings"
+      ]
+    },
+    "plan": {
+      "mustContain": [
+        "Goal:",
+        "Tasks:",
+        "Acceptance criteria:",
+        "Proof-not-press:"
+      ]
+    },
+    "depress": {
+      "mustContain": [
+        "Token Austerity Office report:",
+        "Reduction:",
+        "Ceremony:"
+      ]
+    },
+    "meme": {
+      "mustContain": [
+        "Meme:",
+        "text0:",
+        "text1:"
+      ]
+    }
+  }
+}

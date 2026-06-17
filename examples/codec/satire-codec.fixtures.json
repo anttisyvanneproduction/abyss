@@ -1,0 +1,132 @@
+{
+  "suite": "satire-codec-partner-safe-v1",
+  "version": "1.0.0",
+  "fixtures": [
+    {
+      "id": "reduce-corporate-fog-001",
+      "sourceText": "Our cross-functional innovation acceleration framework will leverage stakeholder synergies to unlock transformational value at scale.",
+      "direction": "reduce",
+      "expectedAnchors": [
+        "keep meaning",
+        "remove jargon",
+        "plain language",
+        "shorter phrasing"
+      ],
+      "forbiddenPhrases": [
+        "let's boil the ocean",
+        "disruptive ninja",
+        "weaponize", 
+        "idiots"
+      ],
+      "expectedRiskLabels": [
+        "corporate_fog",
+        "meaning_drift"
+      ],
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "induce-enterprise-gravity-002",
+      "sourceText": "We shipped a tiny fix in the Teams app: button text now wraps on small screens.",
+      "direction": "induce",
+      "expectedAnchors": [
+        "add enterprise tone",
+        "safe confidence",
+        "retain factual scope",
+        "avoid overclaim"
+      ],
+      "forbiddenPhrases": [
+        "world-class revolution",
+        "industry-defining paradigm",
+        "guaranteed ROI",
+        "we solved everything"
+      ],
+      "expectedRiskLabels": [
+        "partner_safe_enterprise_gravity",
+        "fact_invented_risk"
+      ],
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "linkedin-overpolish-003",
+      "sourceText": "I learned that asking clear questions helped the team unblock an integration issue.",
+      "direction": "reduce",
+      "expectedAnchors": [
+        "less self-congratulatory",
+        "specific and grounded",
+        "keep collaborative tone"
+      ],
+      "forbiddenPhrases": [
+        "humbled and honored",
+        "10x thought leadership",
+        "crushed it",
+        "main-character energy"
+      ],
+      "expectedRiskLabels": [
+        "too_linkedin",
+        "meaning_drift"
+      ],
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "mean-edge-soften-004",
+      "sourceText": "The deck is confusing and nobody can tell what the plan is.",
+      "direction": "reduce",
+      "expectedAnchors": [
+        "critique behavior not person",
+        "constructive rewrite",
+        "actionable next step"
+      ],
+      "forbiddenPhrases": [
+        "clown show",
+        "embarrassing",
+        "lazy team",
+        "incompetent"
+      ],
+      "expectedRiskLabels": [
+        "too_mean"
+      ],
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "meaning-drift-guard-005",
+      "sourceText": "Pilot feedback was mixed: speed improved, but onboarding confusion increased for new admins.",
+      "direction": "induce",
+      "expectedAnchors": [
+        "preserve mixed outcome",
+        "do not flatten nuance",
+        "explicit tradeoff"
+      ],
+      "forbiddenPhrases": [
+        "overwhelmingly positive",
+        "no tradeoffs observed",
+        "universally loved"
+      ],
+      "expectedRiskLabels": [
+        "meaning_drift",
+        "fact_invented_risk"
+      ],
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "fact-invented-risk-006",
+      "sourceText": "The team estimates migration prep will take two weeks if dependencies stay stable.",
+      "direction": "induce",
+      "expectedAnchors": [
+        "keep estimate conditional",
+        "no fabricated metrics",
+        "no fake customer quotes"
+      ],
+      "forbiddenPhrases": [
+        "validated by 500 customers",
+        "99.99% certainty",
+        "signed off by legal",
+        "zero risk"
+      ],
+      "expectedRiskLabels": [
+        "fact_invented_risk",
+        "partner_safe_enterprise_gravity"
+      ],
+      "reviewStatus": "pending"
+    }
+  ]
+}

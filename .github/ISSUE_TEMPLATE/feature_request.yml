@@ -1,0 +1,51 @@
+﻿name: Feature request
+description: Suggest a useful new layer, mode, detector, or ritual compressor.
+title: "feat: "
+labels: ["enhancement", "needs triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What problem should this solve?
+      placeholder: The agent cannot yet detect SharePoint folder cosmology.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What should Abyss Stack do?
+    validations:
+      required: true
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples
+      description: Include safe sample inputs/outputs if useful.
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Layer
+      options:
+        - CLI
+        - Banalizer
+        - ERP Archaeologist
+        - Datapoint Relator
+        - Governance Theatre
+        - Emotional Weather
+        - Enterprise Gravity
+        - Memory
+        - MCP/API
+        - Documentation
+    validations:
+      required: true
+  - type: checkboxes
+    id: acceptance
+    attributes:
+      label: Acceptance
+      options:
+        - label: This makes enterprise work more understandable or more survivable.
+          required: true
+        - label: This does not require a workshop to understand.
+          required: true

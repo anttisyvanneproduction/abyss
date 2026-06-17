@@ -1,0 +1,64 @@
+{
+  "generatedFrom": "examples/codec/satire-codec.fixtures.json",
+  "fixtures": [
+    {
+      "id": "reduce-corporate-fog-001",
+      "direction": "reduce",
+      "sourceText": "Our cross-functional innovation acceleration framework will leverage stakeholder synergies to unlock transformational value at scale.",
+      "expectedRiskLabels": [
+        "corporate_fog",
+        "meaning_drift"
+      ],
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "induce-enterprise-gravity-002",
+      "direction": "induce",
+      "sourceText": "We shipped a tiny fix in the Teams app: button text now wraps on small screens.",
+      "expectedRiskLabels": [
+        "partner_safe_enterprise_gravity",
+        "fact_invented_risk"
+      ],
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "linkedin-overpolish-003",
+      "direction": "reduce",
+      "sourceText": "I learned that asking clear questions helped the team unblock an integration issue.",
+      "expectedRiskLabels": [
+        "too_linkedin",
+        "meaning_drift"
+      ],
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "mean-edge-soften-004",
+      "direction": "reduce",
+      "sourceText": "The deck is confusing and nobody can tell what the plan is.",
+      "expectedRiskLabels": [
+        "too_mean"
+      ],
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "meaning-drift-guard-005",
+      "direction": "induce",
+      "sourceText": "Pilot feedback was mixed: speed improved, but onboarding confusion increased for new admins.",
+      "expectedRiskLabels": [
+        "meaning_drift",
+        "fact_invented_risk"
+      ],
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "fact-invented-risk-006",
+      "direction": "induce",
+      "sourceText": "The team estimates migration prep will take two weeks if dependencies stay stable.",
+      "expectedRiskLabels": [
+        "fact_invented_risk",
+        "partner_safe_enterprise_gravity"
+      ],
+      "reviewStatus": "pending"
+    }
+  ]
+}
