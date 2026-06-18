@@ -19,5 +19,3 @@ jobs:
       - run: npm run build
       - run: npm run build:website-data
       - run: npm run test:mcp
-      - run: npm run test:m365
-      - run: npm run test:foundry

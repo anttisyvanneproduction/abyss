@@ -173,6 +173,7 @@ Open a new terminal after installation.
 
 ## Commands
 
+- \`abyss\`
 - \`abyssstack\`
 - \`antti\`
 - \`antti-mcp\`
@@ -181,8 +182,9 @@ Open a new terminal after installation.
 ## Smoke Test
 
 \`\`\`powershell
-abyssstack --mode diagnose "Power BI definitions live in Excel before go-live"
-antti depress "going forward we will leverage synergies"
+abyss --mode diagnose "Power BI definitions live in Excel before go-live"
+abyss depress "going forward we will leverage synergies"
+abyss thunderdome
 \`\`\`
 
 ## Uninstall

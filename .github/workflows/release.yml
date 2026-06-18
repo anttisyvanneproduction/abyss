@@ -48,7 +48,10 @@ jobs:
               prerelease: tag.includes('-')
             });
             const assetName = `abyss-stack-v${pkg.version}-windows.zip`;
-            const assetPath = path.join('release', assetName);
+            const scopedDir = pkg.name.startsWith('@') ? pkg.name.split('/')[0] : '';
+            const assetPath = scopedDir
+              ? path.join('release', scopedDir, assetName)
+              : path.join('release', assetName);
             await github.rest.repos.uploadReleaseAsset({
               owner: context.repo.owner,
               repo: context.repo.repo,
