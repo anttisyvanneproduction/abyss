@@ -1,0 +1,50 @@
+﻿name: Bug report
+description: Something broke, which is traditional but still actionable.
+title: "bug: "
+labels: ["bug", "needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please remove secrets, customer names, and spreadsheet evidence that belongs in a vault.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the bug clearly.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Commands, input text, and steps needed to reproduce.
+      placeholder: npm run dev -- --mode diagnose "..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should have happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Paste output or logs if safe.
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: Windows 11, Node 22, npm 11
+  - type: checkboxes
+    id: hygiene
+    attributes:
+      label: Hygiene
+      options:
+        - label: I removed secrets and confidential data.
+          required: true
+        - label: This bug is about the tool, not a named person being mildly ridiculous.
+          required: true

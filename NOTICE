@@ -1,0 +1,54 @@
+Abyss Stack
+Copyright (c) 2026 Antti Syvänne
+
+This product includes software developed by third parties under the following licenses.
+
+---
+
+BSD-3-Clause
+
+fast-uri (https://github.com/fastify/fast-uri)
+  Copyright (c) 2021 Dario Waelchli, 2021 the URI.js contributors
+
+qs (https://github.com/ljharb/qs)
+  Copyright (c) 2014 Nathan LaFreniere and other contributors
+
+---
+
+BSD-2-Clause
+
+json-schema-typed (https://github.com/RemyRylan/json-schema-typed)
+  Copyright (c) 2019 Rémy Rylan
+
+---
+
+ISC
+
+inherits (https://github.com/isaacs/inherits)
+  Copyright (c) Isaac Z. Schlueter
+
+isexe (https://github.com/isaacs/isexe)
+  Copyright (c) Isaac Z. Schlueter and Contributors
+
+once (https://github.com/isaacs/once)
+  Copyright (c) Isaac Z. Schlueter and Contributors
+
+setprototypeof (https://github.com/wesleytodd/setprototypeof)
+  Copyright (c) 2015 Wes Todd
+
+which (https://github.com/isaacs/node-which)
+  Copyright (c) Isaac Z. Schlueter and Contributors
+
+wrappy (https://github.com/npm/wrappy)
+  Copyright (c) Isaac Z. Schlueter and Contributors
+
+zod-to-json-schema (https://github.com/StefanTerdell/zod-to-json-schema)
+  Copyright (c) 2022 Stefan Terdell
+
+---
+
+All other dependencies are MIT licensed.
+
+Full dependency list: run `npm list` in the project root.
+License texts for BSD and ISC dependencies are available in their respective
+packages under node_modules/.

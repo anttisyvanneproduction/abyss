@@ -1,0 +1,212 @@
+﻿name: Human Check
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+  issue_comment:
+    types: [created]
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  human-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ask, verify, or close the Finnish gate
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker = "antti-human-check";
+            const labelName = "awaiting human";
+            const failedLabelName = "human check failed";
+            const trusted = new Set(["OWNER", "MEMBER", "COLLABORATOR"]);
+            const trivia = [
+              {
+                id: "kalsarikannit",
+                question: "Finnish survival-mode question: what word means drinking at home in your underwear with no intention of going out, also known as the spiritual opposite of a steering group?",
+                answers: ["kalsarikannit", "kalsarikännit", "kalsarikaennit"]
+              },
+              {
+                id: "lonkero",
+                question: "Finnish beverage procurement question: what canned long drink was originally created for the 1952 Helsinki Olympics and now appears wherever adults have stopped pretending sparkling water is enough?",
+                answers: ["lonkero", "long drink"]
+              },
+              {
+                id: "molkky",
+                question: "Finnish governance simulation question: what wooden throwing game involves numbered pins, mild strategy, and the same probability of consensus as a data ownership meeting?",
+                answers: ["molkky", "mölkky", "moelkky"]
+              },
+              {
+                id: "avanto",
+                question: "Finnish operating-model resilience question: what is the ice hole people enter after sauna, presumably to prepare for licensing renewal discussions?",
+                answers: ["avanto", "ice hole", "winter swimming"]
+              },
+              {
+                id: "korvapuusti",
+                question: "Finnish bakery architecture question: what cinnamon bun literally sounds like an ear slap, which is also how some migration plans feel by sprint three?",
+                answers: ["korvapuusti", "cinnamon bun"]
+              }
+            ];
+
+            const { owner, repo } = context.repo;
+
+            async function ensureLabel(name, color, description) {
+              try {
+                await github.rest.issues.getLabel({ owner, repo, name });
+              } catch (error) {
+                if (error.status !== 404) throw error;
+                await github.rest.issues.createLabel({ owner, repo, name, color, description });
+              }
+            }
+
+            async function ensureLabels() {
+              await ensureLabel(labelName, "d9480f", "Waiting for the contributor to answer the Finnish human check.");
+              await ensureLabel(failedLabelName, "7f1d1d", "Closed because the Finnish human check was not passed.");
+            }
+
+            async function addHumanCheck(issueNumber, actor, authorAssociation) {
+              if (trusted.has(authorAssociation)) return;
+
+              await ensureLabels();
+              await github.rest.issues.addLabels({ owner, repo, issue_number: issueNumber, labels: [labelName] });
+
+              const pick = trivia[Math.floor(Math.random() * trivia.length)];
+              const body = [
+                `<!-- ${marker}:${pick.id} -->`,
+                "### Finnish Human Check",
+                "",
+                `Thanks @${actor}. The repo monarchy requires a small anti-spam ritual before this becomes official paperwork.`,
+                "",
+                pick.question,
+                "",
+                "Reply in this thread with the answer.",
+                "",
+                "Wrong answer from the issue/PR creator closes the item. No answer within seven days closes it during the daily sweep. Maintainers may bypass with `/human-check pass`.",
+                "",
+                "This is intentionally a little unreasonable. Open source must have traditions."
+              ].join("\n");
+
+              await github.rest.issues.createComment({ owner, repo, issue_number: issueNumber, body });
+            }
+
+            function normalize(value) {
+              return value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            }
+
+            function hasAnswer(commentBody, selected) {
+              const normalized = normalize(commentBody);
+              return selected.answers.some((answer) => normalized.includes(normalize(answer)));
+            }
+
+            async function getIssueComments(issueNumber) {
+              return github.paginate(github.rest.issues.listComments, {
+                owner,
+                repo,
+                issue_number: issueNumber,
+                per_page: 100
+              });
+            }
+
+            async function getSelectedTrivia(issueNumber) {
+              const comments = await getIssueComments(issueNumber);
+              const checkComment = comments.find((comment) => comment.body?.includes(`<!-- ${marker}:`));
+              if (!checkComment?.body) return undefined;
+
+              const match = checkComment.body.match(/<!-- antti-human-check:([a-z-]+) -->/);
+              if (!match) return undefined;
+
+              return trivia.find((item) => item.id === match[1]);
+            }
+
+            async function closeForFailedCheck(issueNumber, reason) {
+              await ensureLabels();
+              await github.rest.issues.addLabels({ owner, repo, issue_number: issueNumber, labels: [failedLabelName] });
+              await github.rest.issues.createComment({ owner, repo, issue_number: issueNumber, body: reason });
+              await github.rest.issues.update({ owner, repo, issue_number: issueNumber, state: "closed" });
+            }
+
+            async function passHumanCheck(issueNumber) {
+              await github.rest.issues.removeLabel({ owner, repo, issue_number: issueNumber, name: labelName }).catch((error) => {
+                if (error.status !== 404) throw error;
+              });
+
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: issueNumber,
+                body: "Human check passed. The machinery reluctantly acknowledges a person."
+              });
+            }
+
+            async function verifyHumanCheck(issueNumber, commentBody, commenter, commenterAssociation) {
+              const issue = await github.rest.issues.get({ owner, repo, issue_number: issueNumber });
+              const labels = issue.data.labels.map((label) => typeof label === "string" ? label : label.name);
+              if (!labels.includes(labelName)) return;
+
+              if (trusted.has(commenterAssociation) && normalize(commentBody).includes("/human-check pass")) {
+                await passHumanCheck(issueNumber);
+                return;
+              }
+
+              if (commenter !== issue.data.user.login) return;
+
+              const selected = await getSelectedTrivia(issueNumber);
+              if (!selected) return;
+
+              if (hasAnswer(commentBody, selected)) {
+                await passHumanCheck(issueNumber);
+                return;
+              }
+
+              await closeForFailedCheck(
+                issueNumber,
+                "Finnish human check failed. The item is closed by repository monarchy. Please reopen with better trivia alignment if the maintainers decide reality requires it."
+              );
+            }
+
+            async function sweepUnanswered() {
+              await ensureLabels();
+              const cutoff = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+              const query = `repo:${owner}/${repo} is:open label:"${labelName}" created:<${cutoff}`;
+              const results = await github.paginate(github.rest.search.issuesAndPullRequests, { q: query, per_page: 100 });
+
+              for (const item of results) {
+                await closeForFailedCheck(
+                  item.number,
+                  "Finnish human check expired unanswered after seven days. The issue/PR is closed, as required by the small but absolute monarchy of this repository."
+                );
+              }
+            }
+
+            if (context.eventName === "issues") {
+              const issue = context.payload.issue;
+              await addHumanCheck(issue.number, issue.user.login, issue.author_association);
+            }
+
+            if (context.eventName === "pull_request_target") {
+              const pr = context.payload.pull_request;
+              await addHumanCheck(pr.number, pr.user.login, pr.author_association);
+            }
+
+            if (context.eventName === "issue_comment") {
+              const comment = context.payload.comment;
+              if (comment.user.type === "Bot") return;
+              await verifyHumanCheck(
+                context.payload.issue.number,
+                comment.body ?? "",
+                comment.user.login,
+                comment.author_association
+              );
+            }
+
+            if (context.eventName === "schedule" || context.eventName === "workflow_dispatch") {
+              await sweepUnanswered();
+            }
