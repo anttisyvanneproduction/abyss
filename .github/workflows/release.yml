@@ -1,0 +1,61 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: "https://registry.npmjs.org"
+
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: npm run release:windows
+
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const tag = context.ref.replace('refs/tags/', '');
+            const fs = require('fs');
+            const path = require('path');
+            const pkg = require('./package.json');
+            const release = await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: tag,
+              name: tag,
+              generate_release_notes: true,
+              draft: false,
+              prerelease: tag.includes('-')
+            });
+            const assetName = `abyss-stack-v${pkg.version}-windows.zip`;
+            const scopedDir = pkg.name.startsWith('@') ? pkg.name.split('/')[0] : '';
+            const assetPath = scopedDir
+              ? path.join('release', scopedDir, assetName)
+              : path.join('release', assetName);
+            await github.rest.repos.uploadReleaseAsset({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: release.data.id,
+              name: assetName,
+              data: fs.readFileSync(assetPath)
+            });

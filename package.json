@@ -1,0 +1,75 @@
+{
+  "name": "@syvnne/abyss-stack",
+  "version": "0.9.7",
+  "description": "Enterprise-grade absurdity layer for agent-native workplace survival.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "dist",
+    "prompts",
+    "LICENSE",
+    "NOTICE",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "bin": {
+    "abyss": "dist/cli.js",
+    "abyssstack": "dist/cli.js",
+    "antti": "dist/cli.js",
+    "antti-mcp": "dist/mcp.js",
+    "antti-mcp-http": "dist/mcp-http.js"
+  },
+  "scripts": {
+    "dev": "tsx src/cli.ts",
+    "dev:mcp": "tsx src/mcp.ts",
+    "dev:mcp-http": "tsx src/mcp-http.ts",
+    "build:website-data": "node scripts/build-website-data.mjs",
+    "build": "tsc",
+    "release:windows": "npm run build && node scripts/build-windows-release.mjs",
+    "start": "node dist/cli.js",
+    "test": "vitest run",
+    "test:mcp": "npm run build && node scripts/mcp-smoke.mjs",
+    "lint": "eslint src --ext .ts",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "keywords": [
+    "agent",
+    "mcp",
+    "cli",
+    "workplace-absurdity",
+    "erp",
+    "satire",
+    "enterprise",
+    "banalizer",
+    "finnish-deadpan"
+  ],
+  "author": "Antti Syvänne <ahiltu@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anttisyvanneproduction/abyss.git"
+  },
+  "homepage": "https://github.com/anttisyvanneproduction/abyss#readme",
+  "bugs": {
+    "url": "https://github.com/anttisyvanneproduction/abyss/issues"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "latest",
+    "eslint": "latest",
+    "tsx": "latest",
+    "typescript": "latest",
+    "vitest": "latest"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^8.5.2",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "chalk": "^5.6.2",
+    "commander": "latest",
+    "ora": "^9.4.0"
+  }
+}

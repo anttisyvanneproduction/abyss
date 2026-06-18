@@ -1,0 +1,39 @@
+﻿name: Absurdity report
+description: Report a corporate phrase, ritual, or tool behavior that deserves compression.
+title: "absurdity: "
+labels: ["absurdity", "good first issue"]
+body:
+  - type: textarea
+    id: specimen
+    attributes:
+      label: Specimen
+      description: The phrase, ritual, or workflow. Keep it anonymized.
+      placeholder: We need to unlock data-driven value through a cross-functional enablement journey.
+    validations:
+      required: true
+  - type: textarea
+    id: plain_meaning
+    attributes:
+      label: Plain meaning
+      description: What does it probably mean in human language?
+      placeholder: Make the reports less wrong.
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Corporate fog
+        - ERP archaeology
+        - Master data drama
+        - Governance theatre
+        - Architecture boxes
+        - Enterprise gravity
+        - Emotional weather
+        - Other professional wildlife
+    validations:
+      required: true
+  - type: textarea
+    id: suggested_output
+    attributes:
+      label: Suggested Antti-style output
+      description: Optional. Dry is better than loud.
